@@ -16,5 +16,6 @@ public class LoopProblem {
             }
             System.out.println();
         }
+        sc.close();
     }
 }
