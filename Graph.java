@@ -56,6 +56,25 @@ public class Graph {
         dfsHelper(0, vis);
     }
 
+    boolean isCycleDFS(int u, int par, boolean[] vis) {
+        vis[u] = true;
+        for (int v : adj.get(u)) {
+            if (!vis[v]) {
+                if (isCycleDFS(v, u, vis)) {
+                    return true;
+                }
+            } else if (v != par) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    boolean isCycle() {
+        boolean[] vis = new boolean[v];
+        return isCycleDFS(0, -1, vis);
+    }
+
     public static void main(String[] args) {
         Graph g = new Graph(5);
         g.addEdge(0, 1);
@@ -66,5 +85,6 @@ public class Graph {
         g.printAdj();
         g.bfs();
         // g.dfs();
+        System.out.println(g.isCycle());
     }
 }
